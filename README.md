@@ -1,7 +1,7 @@
 TypeScript--CreateJS--Sandox
 ============================
 
-Collection TypeScript + CreateJS sample codes
+Collection of TypeScript + CreateJS sample codes.
 
 ---------------------------------
 
