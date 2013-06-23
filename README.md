@@ -1,4 +1,4 @@
-TypeScript--CreateJS--Sandox
+TypeScript--CreateJS--Sandbox
 ============================
 
 Collection of TypeScript + CreateJS sample codes.
