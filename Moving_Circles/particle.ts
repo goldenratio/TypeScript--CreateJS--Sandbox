@@ -15,8 +15,9 @@ module com.goldenratio
 
         constructor(public stageProp:createjs.Rectangle)
         {
-            super();
 
+            super();
+            //console.log("particle..");
             this.position = new createjs.Point(0, 0);
 
             //Random colors

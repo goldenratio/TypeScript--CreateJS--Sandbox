@@ -66,6 +66,8 @@ var com;
                 this.stageProp = new createjs.Rectangle(0, 0, 640, 480);
                 createjs.Ticker.setFPS(40);
                 createjs.Ticker.addEventListener("tick", this.onLoopHL.bind(this));
+                window.addEventListener("resize", this.onResizeHandler.bind(this), false);
+                window.addEventListener("orientationchange", this.onResizeHandler.bind(this), false);
                 this.particles = [];
                 for(var i = 0; i < 50; i++) {
                     var p = new com.goldenratio.Particle(this.stageProp);
@@ -73,6 +75,7 @@ var com;
                     p.init();
                     this.particles.push(p);
                 }
+                this.onResizeHandler(null);
             }
             Main.prototype.onLoopHL = function (event) {
                 for(var i = 0; i < this.particles.length; i++) {
@@ -81,6 +84,24 @@ var com;
                 if(this.stage) {
                     this.stage.update();
                 }
+            };
+            Main.prototype.onResizeHandler = function (event) {
+                var gameWidth = window.innerWidth;
+                var gameHeight = window.innerHeight;
+                var originalRatio = 640 / 480;
+                var newRatio = gameWidth / gameHeight;
+                if(newRatio > originalRatio) {
+                    gameWidth = gameHeight * originalRatio;
+                    this.stage.canvas.style.height = gameHeight + "px";
+                    this.stage.canvas.style.width = gameWidth + "px";
+                } else {
+                    gameHeight = gameWidth / originalRatio;
+                    this.stage.canvas.style.height = gameHeight + "px";
+                    this.stage.canvas.style.width = gameWidth + "px";
+                }
+                var gameArea = document.getElementById("gameArea");
+                gameArea.style.width = gameWidth + "px";
+                gameArea.style.height = gameHeight + "px";
             };
             return Main;
         })();

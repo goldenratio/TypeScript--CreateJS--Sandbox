@@ -19,10 +19,13 @@ module com.goldenratio
             console.log("main");
             var canvas:HTMLCanvasElement = <HTMLCanvasElement> document.getElementById("slate");
             this.stage = new createjs.Stage(canvas);
+
             this.stageProp = new createjs.Rectangle(0, 0, 640, 480);
 
             createjs.Ticker.setFPS(40);
             createjs.Ticker.addEventListener("tick", this.onLoopHL.bind(this));
+            window.addEventListener("resize", this.onResizeHandler.bind(this), false);
+            window.addEventListener("orientationchange", this.onResizeHandler.bind(this), false);
 
             this.particles = [];
             for(var i:number = 0; i < 50; i++)
@@ -34,6 +37,7 @@ module com.goldenratio
                 this.particles.push(p);
             }
 
+            this.onResizeHandler(null);
 
         }
 
@@ -51,6 +55,34 @@ module com.goldenratio
             {
                 this.stage.update();
             }
+
+        }
+
+        private onResizeHandler(event:Event):void
+        {
+
+            var gameWidth:number = window.innerWidth;
+            var gameHeight:number = window.innerHeight;
+            var originalRatio:number = 640 / 480;
+            var newRatio:number = gameWidth / gameHeight;
+
+            if(newRatio > originalRatio)
+            {
+                gameWidth = gameHeight * originalRatio;
+                this.stage.canvas.style.height = gameHeight + "px";
+                this.stage.canvas.style.width = gameWidth + "px";
+            }
+            else
+            {
+                gameHeight = gameWidth / originalRatio;
+                this.stage.canvas.style.height = gameHeight + "px";
+                this.stage.canvas.style.width = gameWidth + "px";
+            }
+
+
+            var gameArea:HTMLElement = <HTMLElement> document.getElementById("gameArea");
+            gameArea.style.width = gameWidth + "px";
+            gameArea.style.height = gameHeight + "px";
 
         }
 
