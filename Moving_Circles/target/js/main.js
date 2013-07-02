@@ -21,6 +21,8 @@ var com;
                 gfx.drawCircle(this.position.x, this.position.y, size);
                 var container = new createjs.Shape(gfx);
                 this.addChild(container);
+                this.cache(size * -1, size * -1, size * 2, size * 2);
+                this.snapToPixel = true;
                 this.x = this.position.x;
                 this.y = this.position.y;
             }

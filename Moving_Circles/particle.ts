@@ -34,6 +34,8 @@ module com.goldenratio
 
             var container:createjs.Shape = new createjs.Shape(gfx);
             this.addChild(container);
+            this.cache(size * -1, size * -1, size * 2, size * 2)
+            this.snapToPixel = true;
 
             this.x = this.position.x;
             this.y = this.position.y;
